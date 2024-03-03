@@ -35,7 +35,7 @@ sync_groups:
     # 3 sync: 如果目标目录中已经存在该文件，则跳过
     #         删除存在于目录目录但不存在于源目录中的文件
     # 4 sync-incr: 基于文件的修改时间，只同步源目录中修改时间晚于目标目录的文件
-    type: "copy"
+    type: "mirror"
 
     # 检查间隔，单位为秒，如果daemon为False，则该值无效
     interval: 300  # 默认值: 300 秒, 5 分钟
@@ -67,11 +67,11 @@ sync_groups:
     # 支持在不同的Alist服务器之间同步
     # 例子：http://localhost:5244/test1
     group:
-      - "http://localhost:5244/test1"
-      - "http://localhost:5244/test2"
+      - "http://20.70.192.236:5244/OnedriveCF代理"
+      - "http://20.70.192.236:5244/阿里云盘加密"
 
 notify: # 通知服务，当触发一些异常后，将会发送通知。
-  - enable: true
+  - enable: false
     type: email
     smtp_host: ""
     smtp_port: 25
@@ -80,7 +80,7 @@ notify: # 通知服务，当触发一些异常后，将会发送通知。
     recipients:
       - ""
 
-  - enable: true
+  - enable: false
     type: webhook
     webhook_url: ""
     headers:
