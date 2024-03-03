@@ -14,7 +14,7 @@ thread_pool_max_size:
 
 # Alist 服务器信息 type: list
 alist_servers:
-  - base_url: http://20.70.192.236:5244/
+  - base_url: http://loaclhost:5244/
     username: "bacon"
     password: "ypq123456"
     verify_ssl: false
@@ -67,8 +67,8 @@ sync_groups:
     # 支持在不同的Alist服务器之间同步
     # 例子：http://localhost:5244/test1
     group:
-      - "http://20.70.192.236:5244/OnedriveCF代理"
-      - "http://20.70.192.236:5244/阿里云盘加密"
+      - "http://loaclhost:5244/OnedriveCF代理"
+      - "http://loaclhost:5244/阿里云盘加密"
 
 notify: # 通知服务，当触发一些异常后，将会发送通知。
   - enable: false
