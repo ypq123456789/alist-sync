@@ -49,13 +49,14 @@ jobs:
         env:
           _ALIST_ADMIN_PASSWORD: ${{ secrets.ALIST_ADMIN_PASSWORD }}
         run: |
+          sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           bash -ex bootstrap.sh install
           # init-alist 总是会重置管理员密码为环境变量。
           bash -x bootstrap.sh alist-init
 
 
       - name: Create Storage for Alist if load cache failed
-        if: ${{ github.event.inputs.reload_storage == 'true' }} or ${{ steps.alist-data-cache.outputs.cache-hit != 'true'}}
+        if: github.event.inputs.reload_storage == 'true'  ||  steps.alist-data-cache.outputs.cache-hit != 'true'
         env:
           _ALIST_ADMIN_PASSWORD: ${{ secrets.ALIST_ADMIN_PASSWORD }}
 
@@ -73,14 +74,33 @@ jobs:
           EOF
           python3 tools/create_storage.py
 
+      - name: Create Tunnel for Cloudflare
+        run: |
+          test ! -n "${{secrets.CLOUDFLARE_TUNNEL_TOKEN}}" && {
+            echo "CLOUDFLARE_TUNNEL_TOKEN is not set. Skip Cloudflare Tunnel Installation."
+            exit 0
+          }
+          echo "Installing Cloudflare Tunnel ..."
+          curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && 
+          sudo dpkg -i cloudflared.deb && 
+          sudo cloudflared service install ${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}
+          echo "CLOUDFLARE_INSTALLED=true" >> "$GITHUB_ENV"
+          echo "Cloudflare Tunnel Installed."
+
       - name: RUN Alist Sync
         run: |
           cat > config.yaml << EOF
           ${{ secrets.SYNC_CONFIG }}
           EOF
           set -ex
-          export TERM=dumb
+          # export TERM=dumb
           export FORCE_COLOR=true
           export COLUMNS=160
           ./bootstrap.sh main test-config
           ./bootstrap.sh main sync 
+
+      - name: Debugger
+        if: ${{ github.event.inputs.debug == 'true' && failure() }}
+        uses: csexton/debugger-action@master
+
+          
