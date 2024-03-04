@@ -6,9 +6,10 @@ Alist 同步工具
 
 ## 本地运行
 
-```bash
-python -m alist_sync -c "<config-file.yaml>"
-```
+1. 克隆并cd到存储库： `git clone https://github.com/lee-cq/alist-sync.git && cd alist-sync`
+2. 创建配置文件[配置模版](./config-template.yaml)： `cp config-template.yaml config.yaml`
+3. 配置AList服务端（可以是远程的）
+4. Linux: `./bootstrap.sh main sync` Windows: `python -m alist_aync sync`
 
 ## Actions 运行
 
@@ -30,7 +31,6 @@ python -m alist_sync -c "<config-file.yaml>"
 
 ### 1. copy 简单复制 (已实现)
 
-
 #### 工作原理：
 
 将源目录中的文件分别同步到全部的目标目录中，
@@ -38,7 +38,7 @@ python -m alist_sync -c "<config-file.yaml>"
 1. 如果目标目录中已经存在该文件，则跳过
 2. 忽略存在与目标目录中但不存在于源目录中的文件
 
-### 2. mirror 镜像复制 (已实现)
+### 2. mirror 镜像复制 (待实现)
 
 #### 工作原理：
 
