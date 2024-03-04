@@ -22,7 +22,7 @@ from alist_sync.version import __version__
 sync_config = create_config()
 
 WorkerType = ["delete", "copy"]
-# noinspection PyTypeHints
+# noinspection PyTypeHints,PyCompatibility
 WorkerTypeModify = Literal[*WorkerType]
 
 WorkerStatus = [
@@ -35,7 +35,7 @@ WorkerStatus = [
     "done",
     "failed",
 ]
-# noinspection PyTypeHints
+# noinspection PyTypeHints,PyCompatibility
 WorkerStatusModify = Literal[*WorkerTypeModify]
 
 logger = logging.getLogger("alist-sync.worker")
