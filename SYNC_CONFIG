@@ -1,5 +1,5 @@
 # 如果没有配置MongoDB，文档将会存储至本地缓存
-mongodb_uri: "mongodb+srv://${username}:${password}@${host}/alist_sync?retryWrites=true&w=majority&appName=A1"
+mongodb_uri: "mongodb+srv://648558021:ypq123456@cluster0.mecsdse.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 # 缓存文件夹
 cache_dir: ./.alist-sync-cache
@@ -18,11 +18,6 @@ alist_servers:
     username: "admin"
     password: "123456"
     verify_ssl: false
-
-  - base_url: http://remote_alist_server/
-    username: "admin"
-    password: "admin"
-
 
 sync_groups:
   - name: "sync1"
