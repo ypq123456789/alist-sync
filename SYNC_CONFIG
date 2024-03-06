@@ -61,8 +61,8 @@ sync_groups:
     # 支持在不同的Alist服务器之间同步
     # 例子：http://localhost:5244/test1
     group:
-      - "https://alist.bacon123.eu.org/OnedriveCF%E4%BB%A3%E7%90%86"
-      - "https://alist.bacon123.eu.org/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%8A%A0%E5%AF%86"
+      - "https://alist.bacon123.eu.org/OnedriveCF"
+      - "https://alist.bacon123.eu.org/Alicrypt"
 
 notify: # 通知服务，当触发一些异常后，将会发送通知。
   - enable: false
