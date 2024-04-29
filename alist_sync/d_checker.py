@@ -90,8 +90,8 @@ class Checker:
             self._stat_get_times += 1
             logger.debug("get_stat: %s, times: %d", path, self._stat_get_times)
             try:
-                stat = path.client.dict_files_items(
-                    path.parent.as_posix(), cache_empty=True
+                stat = path.client.dict_files_item(
+                    path.parent.as_posix()
                 ).get(path.name)
             except FileNotFoundError:
                 stat = None
